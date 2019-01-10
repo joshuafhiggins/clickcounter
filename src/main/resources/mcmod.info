@@ -1,0 +1,20 @@
+[
+{
+  "modid": "leftclickcounter",
+  "name": "Left Click Counter Mod (Now has Right Clicks)",
+  "description": "Counts how many times you left click. NOTE: Not all features have been implented yet. I still need to implent a way to change the postion of were the counter is placed and find a way to store all the clicks and settings
+  Chanelog:
+  -Removed Keybinds
+  +Added Right Clicks
+  +Changed Name of Left Clicks to PvP Clicks",
+  "version": "1.1.0",
+  "mcversion": "1.8.9",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["CyborgGamer21/Litl_Toast"],
+  "credits": "The Downloaders and xTrM_ (<---- there YouTube Channel name) for the rainbow text.",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
