@@ -1,8 +1,8 @@
 [
 {
   "modid": "leftclickcounter",
-  "name": "Left Click Counter Mod (Now has Right Clicks)",
-  "description": "Counts how many times you left click. NOTE: Not all features have been implented yet. I still need to implent a way to change the postion of were the counter is placed and find a way to store all the clicks and settings
+  "name": "Left Click Counter Mod",
+  "description": "Counts how many times you left click.
   Chanelog:
   -Removed Keybinds
   +Added Right Clicks
