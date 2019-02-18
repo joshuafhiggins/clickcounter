@@ -5,21 +5,24 @@ import java.net.URL;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatStyle;
+import net.minecraft.util.EnumChatFormatting;
 
 public class UpdateDetection 
 {
-    
-	public static void Detection(String[] args) 
-    {
-        System.out.println(UpdateDetection.checkIfURLExists("https://minecraft.net/en-us/article/new-realms-spirit-strategy-and-shep/"));
-    }
+	public static String targetUrl1 = "https://sites.google.com/view/toasty-modding/mods/left-click-counter-mod/downloads/mc-1-8-9/version-2-1-1";
+	public static String targetUrl2 = "https://sites.google.com/view/toasty-modding/mods/left-click-counter-mod/downloads/mc-1-8-9/version-2-2-0";
+	public static String targetUrl3 = "https://sites.google.com/view/toasty-modding/mods/left-click-counter-mod/downloads/mc-1-8-9/version-3-0-0";
+	
  
-    public static boolean checkIfURLExists(String targetUrl) 
+    public static boolean checkIfURLExists() 
     {
         HttpURLConnection httpUrlConn;
         try 
         {
-            httpUrlConn = (HttpURLConnection) new URL(targetUrl).openConnection();
+            httpUrlConn = (HttpURLConnection) new URL(targetUrl1).openConnection();
+            httpUrlConn = (HttpURLConnection) new URL(targetUrl2).openConnection();
+            httpUrlConn = (HttpURLConnection) new URL(targetUrl3).openConnection();
  
             /* A HEAD request is just like a GET request, except that it asks
             the server to return the response headers only, and not the
@@ -33,9 +36,15 @@ public class UpdateDetection
             httpUrlConn.setConnectTimeout(30000);
             httpUrlConn.setReadTimeout(30000);
  
-            // Print HTTP status code/message for your information.
-            Minecraft.getMinecraft().thePlayer.sendChatMessage("Response Code: " + httpUrlConn.getResponseCode());
-            Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("Response Message: " + httpUrlConn.getResponseMessage()));
+            if (httpUrlConn.getResponseCode() != 404) 
+            { 
+            	Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("There is an update availble for Left Click Counter Mod. Go to my website to get it. Website: sites.google.com/view/toasty-modding/mods/left-click-counter-mod/  .").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));
+            }
+            else 
+            {
+            	Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("There are no updates availble at this time for Left Click Counter Mod.").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+            }
+            
  
             return (httpUrlConn.getResponseCode() == HttpURLConnection.HTTP_OK);
         } 
