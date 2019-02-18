@@ -23,9 +23,7 @@ public class LcmUpdate extends CommandBase
 	@Override
 	public void processCommand(ICommandSender sender, String[] args) throws CommandException 
 	{
-		UpdateDetection.checkIfURLExists("https://sites.google.com/view/toasty-modding/mods/left-click-counter-mod/downloads/mc-1-8-9/version-2-1-1");
-		UpdateDetection.checkIfURLExists("https://sites.google.com/view/toasty-modding/mods/left-click-counter-mod/downloads/mc-1-8-9/version-2-2-0");
-		UpdateDetection.checkIfURLExists("https://sites.google.com/view/toasty-modding/mods/left-click-counter-mod/downloads/mc-1-8-9/version-3-0-0");
+		UpdateDetection.checkIfURLExists();
 	}
 	
 	@Override
