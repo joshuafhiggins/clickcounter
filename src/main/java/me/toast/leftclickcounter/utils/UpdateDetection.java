@@ -10,7 +10,7 @@ import net.minecraft.util.EnumChatFormatting;
 
 public class UpdateDetection 
 {
-	public static String targetUrl1 = "https://sites.google.com/view/toasty-modding/mods/left-click-counter-mod/downloads/mc-1-8-9/version-2-1-1";
+	public static String targetUrl1 = "https://sites.google.com/view/toasty-modding/mods/left-click-counter-mod/downloads/mc-1-8-9/version-2-1-2";
 	public static String targetUrl2 = "https://sites.google.com/view/toasty-modding/mods/left-click-counter-mod/downloads/mc-1-8-9/version-2-2-0";
 	public static String targetUrl3 = "https://sites.google.com/view/toasty-modding/mods/left-click-counter-mod/downloads/mc-1-8-9/version-3-0-0";
 	
