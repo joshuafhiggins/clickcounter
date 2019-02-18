@@ -4,10 +4,19 @@
   "name": "Left Click Counter Mod",
   "description": "Counts how many times you left click.
   Chanelog:
-  -Removed Keybinds
-  +Added Right Clicks
-  +Changed Name of Left Clicks to PvP Clicks",
-  "version": "1.1.0",
+  
+  2.1.0
+  
+  -Removed /lcmPrefix
+  +Added /lcmUpdate
+  +100% reliable click system
+    If you have a CPS of 20 or more this mod will lag you really badly I think. I only have a CPS of 7. (CPS = Clicks Per Second)
+    
+  2.1.1
+  
+  +Will Check for updates on join bug fix
+  ",
+  "version": "2.1.1",
   "mcversion": "1.8.9",
   "url": "",
   "updateUrl": "",
