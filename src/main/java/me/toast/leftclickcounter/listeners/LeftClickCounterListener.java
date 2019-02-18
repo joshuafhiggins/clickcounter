@@ -24,30 +24,11 @@ public class LeftClickCounterListener
 		this.mod = mod;
 	}
 	
-	private int PVPClicks = 0;
-	
 	boolean isHeld = false;
 
 	private Minecraft mc = Minecraft.getMinecraft();
 	FontRenderer fr = mc.fontRendererObj;
-	
-	//Loading Clicks
-	@SubscribeEvent
-	public void ClientConnectedToServerEvent(FMLNetworkEvent.ClientConnectedToServerEvent event) 
-	{
-		PVPClicks = mod.getSettings().getClicks();
-		mod.getSettings().setClicks(0);
-		mod.getSettings().saveConfig();
-	}
-	
-	//Saving Clicks
-	@SubscribeEvent
-	public void ClientDisconnectionFromServerEvent(FMLNetworkEvent.ClientDisconnectionFromServerEvent event) 
-	{
-		mod.getSettings().setClicks(PVPClicks);
-		mod.getSettings().saveConfig();
-		PVPClicks = 0;
-	}
+	Settings cfg = mod.getSettings();
 	
 	//Click Counter
 	@SubscribeEvent
@@ -57,7 +38,8 @@ public class LeftClickCounterListener
 		{
 			if (isHeld == false) 
 			{
-				PVPClicks++;
+				cfg.add1Clicks();
+				cfg.saveConfig();
 				isHeld = true;
 			} 
 			else 
@@ -89,8 +71,10 @@ public class LeftClickCounterListener
 		{
 			if (mc.theWorld != null) 
 			{			
-				//fr.drawStringWithShadow("ง6" + mod.getSettings().getPrefix() + ": " + PVPClicks, mod.getSettings().getposX(), mod.getSettings().getposY(), -1);
-				fr.drawStringWithShadow(mod.getSettings().getPrefix() + ": " + PVPClicks, mod.getSettings().getposX(), mod.getSettings().getposY(), RainbowUtils.effect(i * 3500000L, brightness, 250).getRGB());
+				/* Dev Download one */
+				//fr.drawStringWithShadow("ยง6" + cfg.getPrefix() + ": " + cfg.getClicks(), cfg.getposX(), cfg.getposY(), -1);
+				/* Public Download one */
+				fr.drawStringWithShadow(cfg.getPrefix() + ": " + cfg.getClicks(), cfg.getposX(), cfg.getposY(), RainbowUtils.effect(i * 3500000L, brightness, 250).getRGB());
 			}
 		}
 	}
