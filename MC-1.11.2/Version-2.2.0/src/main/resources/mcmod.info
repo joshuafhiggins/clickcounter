@@ -1,0 +1,24 @@
+[
+{
+  "modid": "leftclickcounter",
+  "name": "Left Click Counter Mod",
+  "description": "Counts how many times you left click.
+  Chanelog:
+  
+    2.2.0
+    
+    +Added /LcmColor for customizable color (RGB)
+    +Added /LcmChroma doing this will make the text become rainbow
+    +Made all command names capital
+  ",
+  "version": "2.2.0",
+  "mcversion": "1.11.2",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Litl_Toast"],
+  "credits": "The Downloaders and xTrM_ (<---- there YouTube Channel name) for the rainbow text.",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
