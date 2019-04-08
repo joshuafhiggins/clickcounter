@@ -1,3 +1,3 @@
-LeftClickCounter
+#Left Click Counter Mod
 
 This mod tells you how many times you left click.....
