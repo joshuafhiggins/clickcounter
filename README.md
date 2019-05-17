@@ -1,3 +1,1 @@
-#Left Click Counter Mod
-
-This mod tells you how many times you left click.....
+OLD VERSION OF THE GITHUB STUFF GO TO MY PROFILE AND FIND THE NEW ONE.
