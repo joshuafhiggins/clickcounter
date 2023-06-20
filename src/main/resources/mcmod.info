@@ -1,0 +1,16 @@
+[
+{
+  "modid": "lcm",
+  "name": "Left Click Counter Mod",
+  "description": "Counts how many times you left click. (idiot)",
+  "version": "2.3.0",
+  "mcversion": "1.8.9",
+  "url": "sites.google.com/view/toasty-modding/mods/left-click-counter-mod",
+  "updateUrl": "",
+  "authorList": ["Litl_Toast"],
+  "credits": "The Downloaders and xTrM_ (<---- there YouTube Channel name) for the rainbow text.",
+  "logoFile": "logo.png",
+  "screenshots": [],
+  "dependencies": []
+}
+]
