@@ -1,7 +1,5 @@
 package me.toast.clicks;
 
-import me.toast.clicks.guis.GuiMain;
-import net.minecraft.client.Minecraft;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 

@@ -1,7 +1,5 @@
 package me.toast.clicks;
 
-import me.toast.clicks.guis.GuiMain;
-import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;

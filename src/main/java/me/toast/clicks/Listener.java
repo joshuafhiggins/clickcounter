@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.network.FMLNetworkEvent;
 import static me.toast.clicks.Utils.CheckForUpdates;
 
 public class Listener {
-    private Minecraft mc = Minecraft.getMinecraft();
+    private final Minecraft mc = Minecraft.getMinecraft();
     boolean isHeld = false;
 
     @SubscribeEvent
