@@ -9,14 +9,14 @@ import java.awt.*;
 public class Utils {
 
     public static void DrawLeftClicks(float brightness) {
-        String string = Clicks.SETTINGS.getPrefix() + Clicks.SETTINGS.getClicks();
+        String string = Clicks.SETTINGS.getLeftPrefix() + Clicks.SETTINGS.getLeftClicks();
         Minecraft mc = Minecraft.getMinecraft();
         FontRenderer fr = mc.fontRendererObj;
 
         for (int i = 0; i < string.length(); i++) {
             if (mc.theWorld != null && mc.currentScreen == null) {
-                if (Clicks.SETTINGS.getIsChroma()) { fr.drawString(string, Clicks.SETTINGS.getPosX(), Clicks.SETTINGS.getPosY(), RainbowEffect(i * 3500000L, brightness, 250).getRGB(), Clicks.SETTINGS.getIsBackground()); }
-                else { fr.drawString(string, Clicks.SETTINGS.getPosX(), Clicks.SETTINGS.getPosY(), GetCustomColor().getRGB(), Clicks.SETTINGS.getIsBackground()); }
+                if (Clicks.SETTINGS.getLeftChroma()) { fr.drawString(string, Clicks.SETTINGS.getLeftPos()[0], Clicks.SETTINGS.getLeftPos()[1], RainbowEffect(i * 3500000L, brightness, 250).getRGB(), Clicks.SETTINGS.getLeftShadow()); }
+                else { fr.drawString(string, Clicks.SETTINGS.getLeftPos()[0], Clicks.SETTINGS.getLeftPos()[1], GetCustomColor().getRGB(), Clicks.SETTINGS.getLeftShadow()); }
             }
         }
     }
@@ -28,7 +28,7 @@ public class Utils {
     }
 
     public static Color GetCustomColor() {
-        return new Color(Clicks.SETTINGS.getColor());
+        return new Color(Clicks.SETTINGS.getLeftColor());
     }
 
     public static boolean TextFieldIntersect(GuiTextField field, int mouseX, int mouseY) {

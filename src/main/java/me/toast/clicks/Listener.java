@@ -23,7 +23,7 @@ public class Listener {
     public void MouseInputEvent(InputEvent e) {
         if (mc.gameSettings.keyBindAttack.isKeyDown()) {
             if (!isHeld) {
-                Clicks.SETTINGS.addClicks();
+                Clicks.SETTINGS.incrementLeftClick();
                 isHeld = true;
             }
         } else {

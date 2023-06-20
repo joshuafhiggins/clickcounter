@@ -16,7 +16,7 @@ public class GuiPrefix extends GuiScreen {
         super.initGui();
 
         prefixText = new GuiTextField(0, fontRendererObj, width / 2 - 30, height / 2 - 45, 200, 25);
-        prefixText.setText(Clicks.SETTINGS.getPrefix());
+        prefixText.setText(Clicks.SETTINGS.getLeftPrefix());
 
         back = new GuiButton(0, width / 2 - 100, 0, "Go back");
 
@@ -65,7 +65,7 @@ public class GuiPrefix extends GuiScreen {
 
     @Override
     public void onGuiClosed() {
-        Clicks.SETTINGS.setPrefix(prefixText.getText());
+        Clicks.SETTINGS.setLeftPrefix(prefixText.getText());
 
         super.onGuiClosed();
     }

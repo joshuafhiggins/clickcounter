@@ -23,10 +23,10 @@ public class GuiPosition extends GuiScreen {
     @Override
     public void initGui() {
         super.initGui();
-        xPos = Clicks.SETTINGS.getPosX();
-        yPos = Clicks.SETTINGS.getPosY();
+        xPos = Clicks.SETTINGS.getLeftPos()[0];
+        yPos = Clicks.SETTINGS.getLeftPos()[1];
         isFocused = false;
-        string = Clicks.SETTINGS.getPrefix() + Clicks.SETTINGS.getClicks();
+        string = Clicks.SETTINGS.getLeftPrefix() + Clicks.SETTINGS.getLeftClicks();
         calculatedX = string.length() * 10;
         back = new GuiButton(3, width / 2 - 100, 0, "Go back");
         buttonList.add(back);
@@ -65,8 +65,7 @@ public class GuiPosition extends GuiScreen {
         if (isFocused) {
             isFocused = false;
             mc.thePlayer.addChatMessage(new ChatComponentText("Saved Location!").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.DARK_GREEN)));
-            Clicks.SETTINGS.setPosX(mouseX);
-            Clicks.SETTINGS.setPosY(mouseY);
+            Clicks.SETTINGS.setLeftPos(mouseX, mouseY);
             xPos = mouseX;
             yPos = mouseY;
         }
@@ -94,7 +93,7 @@ public class GuiPosition extends GuiScreen {
 
     private void drawString(String string, float brightness) {
         for (int i = 0; i < string.length(); i++) {
-            if (Clicks.SETTINGS.getIsChroma()) { mc.fontRendererObj.drawStringWithShadow(string, xPos, yPos, RainbowEffect(i * 3500000L, brightness, 250).getRGB()); }
+            if (Clicks.SETTINGS.getLeftChroma()) { mc.fontRendererObj.drawStringWithShadow(string, xPos, yPos, RainbowEffect(i * 3500000L, brightness, 250).getRGB()); }
             else { mc.fontRendererObj.drawStringWithShadow(string, xPos, yPos, GetCustomColor().getRGB()); }
         }
     }

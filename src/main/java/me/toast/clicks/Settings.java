@@ -5,78 +5,69 @@ import java.io.File;
 
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
 
 public class Settings {
     private final File saveFile = new File(Minecraft.getMinecraft().mcDataDir, "config/Clicks.cfg");
-    private int posX = 0;
-    private int posY = 0;
-    private int Clicks = 0;
-    private String Prefix = "Left Clicks: ";
-    private int color = Color.WHITE.getRGB();
-    private boolean isChroma = false;
-    private boolean hasBackground = false;
 
-    public int getPosX() {
-        return posX;
+    private int[] leftPos = { 0, 0 };
+    private int leftClicks = 0;
+    private String leftPrefix = "Left Clicks: ";
+    private int leftColor = Color.WHITE.getRGB();
+    private boolean leftChroma = false;
+    private boolean leftShadow = false;
+
+    public int[] getLeftPos() {
+        return leftPos;
     }
 
-    public int getPosY() {
-        return posY;
+    public int getLeftClicks() {
+        return leftClicks;
     }
 
-    public int getClicks() {
-        return Clicks;
+    public String getLeftPrefix() {
+        return leftPrefix;
     }
 
-    public String getPrefix() {
-        return Prefix;
+    public int getLeftColor() {
+        return leftColor;
     }
 
-    public int getColor() {
-        return color;
+    public boolean getLeftChroma() {
+        return leftChroma;
     }
 
-    public boolean getIsChroma() {
-        return isChroma;
+    public boolean getLeftShadow() {
+        return leftShadow;
     }
 
-    public boolean getIsBackground() {
-        return hasBackground;
-    }
-
-    public void setPosX(int newPosX) {
-        posX = newPosX;
+    public void setLeftPos(int newPosX, int newPosY) {
+        leftPos[0] = newPosX;
+        leftPos[1] = newPosY;
         saveConfig();
     }
 
-    public void setPosY(int newPosY) {
-        posY = newPosY;
+    public void incrementLeftClick() {
+        leftClicks++;
         saveConfig();
     }
 
-    public void addClicks() {
-        Clicks++;
+    public void setLeftPrefix(String newPrefix) {
+        leftPrefix = newPrefix;
         saveConfig();
     }
 
-    public void setPrefix(String newPrefix) {
-        Prefix = newPrefix;
+    public void setLeftColor(int newColor) {
+        leftColor = newColor;
         saveConfig();
     }
 
-    public void setColor(int newColor) {
-        color = newColor;
+    public void setLeftChroma() {
+        leftChroma = !leftChroma;
         saveConfig();
     }
 
-    public void setIsChroma() {
-        isChroma = !isChroma;
-        saveConfig();
-    }
-
-    public void setHasBackground() {
-        hasBackground = !hasBackground;
+    public void setLeftShadow() {
+        leftShadow = !leftShadow;
         saveConfig();
     }
 
@@ -93,53 +84,20 @@ public class Settings {
     }
 
     private void updateConfig(Configuration config, boolean load) {
-        Property prop = config.get("Position", "PosX", 0);
         if (load) {
-            this.posX = prop.getInt();
+            leftPos = config.get("Left", "Position", new int[]{ 0, 0 }).getIntList();
+            leftClicks = config.get("Left", "Clicks", 0).getInt();
+            leftPrefix = config.get("Left", "Prefix", "Left Clicks: ").getString();
+            leftColor = config.get("Left", "Color", Color.WHITE.getRGB()).getInt();
+            leftChroma = config.get("Left", "Chroma", false).getBoolean();
+            leftShadow = config.get("Left", "Shadow", true).getBoolean();
         } else {
-            prop.setValue(this.posX);
-        }
-
-        Property prop1 = config.get("Position", "PosY", 0);
-        if (load) {
-            this.posY = prop1.getInt();
-        } else {
-            prop1.setValue(this.posY);
-        }
-
-        Property prop2 = config.get("Global", "Left Clicks", 0);
-        if (load) {
-            this.Clicks = prop2.getInt();
-        } else {
-            prop2.setValue(this.Clicks);
-        }
-
-        Property prop3 = config.get("Text", "Prefix", "Left Clicks: ");
-        if (load) {
-            this.Prefix = prop3.getString();
-        } else {
-            prop3.setValue(this.Prefix);
-        }
-
-        Property prop4 = config.get("Color", "Color", Color.WHITE.getRGB());
-        if (load) {
-            this.color = prop4.getInt();
-        } else {
-            prop4.setValue(this.color);
-        }
-
-        Property prop7 = config.get("Color", "IsChroma", false);
-        if (load) {
-            this.isChroma = prop7.getBoolean();
-        } else {
-            prop7.setValue(this.isChroma);
-        }
-
-        Property prop9 = config.get("Color", "HasBackground", false);
-        if (load) {
-            this.hasBackground = prop9.getBoolean();
-        } else {
-            prop9.setValue(this.hasBackground);
+            config.get("Left", "Position", new int[]{ 0, 0 }).setValues(leftPos);
+            config.get("Left", "Clicks", 0).setValue(leftClicks);
+            config.get("Left", "Prefix", "Left Clicks: ").setValue(leftPrefix);
+            config.get("Left", "Color", Color.WHITE.getRGB()).setValue(leftColor);
+            config.get("Left", "Chroma", false).setValue(leftChroma);
+            config.get("Left", "Shadow", true).setValue(leftShadow);
         }
     }
 }

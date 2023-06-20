@@ -27,8 +27,8 @@ public class GuiColor extends GuiScreen {
     @Override
     public void initGui() {
         super.initGui();
-        isChroma = new GuiButton(0, width / 2 - 100, height / 2 + 25, "Chroma? " + Clicks.SETTINGS.getIsChroma());
-        isBackground = new GuiButton(1, width / 2 - 100, height / 2 + 50, "Shadow? " + Clicks.SETTINGS.getIsBackground());
+        isChroma = new GuiButton(0, width / 2 - 100, height / 2 + 25, "Chroma? " + Clicks.SETTINGS.getLeftChroma());
+        isBackground = new GuiButton(1, width / 2 - 100, height / 2 + 50, "Shadow? " + Clicks.SETTINGS.getLeftShadow());
         testNewColor = new GuiButton(2, width / 2 - 100, height / 2 + 75, "Refresh Color");
         back = new GuiButton(3, width / 2 - 100, 0, "Go back");
 
@@ -49,7 +49,7 @@ public class GuiColor extends GuiScreen {
         blue.setText("" + GetCustomColor().getBlue());
         blue.setMaxStringLength(3);
 
-        testColor = new Color(Clicks.SETTINGS.getColor());
+        testColor = new Color(Clicks.SETTINGS.getLeftColor());
     }
 
     @Override
@@ -71,12 +71,12 @@ public class GuiColor extends GuiScreen {
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
         if (button == isChroma) {
-            Clicks.SETTINGS.setIsChroma();
-            isChroma.displayString = "Chroma? " +Clicks.SETTINGS.getIsChroma();
+            Clicks.SETTINGS.setLeftChroma();
+            isChroma.displayString = "Chroma? " +Clicks.SETTINGS.getLeftChroma();
         }
         if (button == isBackground) {
-            Clicks.SETTINGS.setHasBackground();
-            isBackground.displayString = "Shadow? " + Clicks.SETTINGS.getIsBackground();
+            Clicks.SETTINGS.setLeftShadow();
+            isBackground.displayString = "Shadow? " + Clicks.SETTINGS.getLeftShadow();
         }
 
         if (button == testNewColor) {
@@ -138,7 +138,7 @@ public class GuiColor extends GuiScreen {
             Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("Invalid number for one of the color channels! (Numbers can't be greater than 255)"));
         } else {
             Color color = new Color(redInt, greenInt, blueInt);
-            Clicks.SETTINGS.setColor(color.getRGB());
+            Clicks.SETTINGS.setLeftColor(color.getRGB());
         }
 
         super.onGuiClosed();
