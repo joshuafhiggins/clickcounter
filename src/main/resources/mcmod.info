@@ -1,6 +1,6 @@
 [
 {
-  "modid": "clickcounter",
+  "modid": "clicks",
   "name": "Click Counter Mod",
   "description": "Counts how many times you left/right click.",
   "version": "2.4.0",

@@ -1,29 +1,29 @@
 package me.toast.clicks;
 
+import me.toast.clicks.guis.GuiMain;
+import net.minecraft.client.Minecraft;
 import net.minecraft.command.CommandBase;
-import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 
-public class Command extends CommandBase
-{
-    private MainMod mod;
-    public Command(MainMod mod) { this.mod = mod; }
+public class Command extends CommandBase {
 
     @Override
-    public String getCommandName()
-    {
-        return "lcm";
+    public String getCommandName() {
+        return Clicks.MOD_ID;
     }
 
     @Override
-    public String getCommandUsage(ICommandSender sender)
-    {
+    public String getCommandUsage(ICommandSender sender) {
         return "/" + getCommandName();
     }
 
     @Override
-    public void processCommand(ICommandSender sender, String[] args) throws CommandException { mod.openMainGui(); }
+    public void processCommand(ICommandSender sender, String[] args) {
+        Clicks.GUI_OPEN = true;
+    }
 
     @Override
-    public boolean canCommandSenderUseCommand(ICommandSender sender) { return true; }
+    public boolean canCommandSenderUseCommand(ICommandSender sender) {
+        return true;
+    }
 }

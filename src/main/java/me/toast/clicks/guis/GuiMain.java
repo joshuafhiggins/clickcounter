@@ -1,23 +1,23 @@
 package me.toast.clicks.guis;
 
-import me.toast.clicks.MainMod;
-import me.toast.clicks.utils.UpdateDetection;
+import me.toast.clicks.Clicks;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import org.lwjgl.input.Keyboard;
+
 import java.io.IOException;
 
-public class GuiMain extends GuiScreen
-{
-    public GuiButton position;
-    public GuiButton prefix;
-    public GuiButton color;
-    public GuiButton checkForUpdates;
+import static me.toast.clicks.Utils.CheckForUpdates;
 
-    public MainMod mod;
-    public GuiMain(MainMod mod) {
-            this.mod = mod;
-        }
+public class GuiMain extends GuiScreen {
+    private GuiButton position;
+    private GuiButton prefix;
+    private GuiButton color;
+    private GuiButton checkForUpdates;
+
+    public GuiMain() {
+
+    }
 
     @Override
     public void initGui() {
@@ -38,7 +38,7 @@ public class GuiMain extends GuiScreen
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         drawDefaultBackground();
 
-        drawCenteredString(fontRendererObj, "Left Click Counter Mod", width / 2, height / 2 - 125, 0xFFFFFF);
+        drawCenteredString(fontRendererObj, Clicks.NAME, width / 2, height / 2 - 125, 0xFFFFFF);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
@@ -48,14 +48,14 @@ public class GuiMain extends GuiScreen
         super.actionPerformed(button);
 
         if (button == position)
-            mc.displayGuiScreen(new GuiPosition(mod));
+            mc.displayGuiScreen(new GuiPosition());
         if (button == prefix)
-            mc.displayGuiScreen(new GuiPrefix(mod));
+            mc.displayGuiScreen(new GuiPrefix());
         if (button == color)
-            mc.displayGuiScreen(new GuiColor(mod));
+            mc.displayGuiScreen(new GuiColor());
 
         if (button == checkForUpdates) {
-            UpdateDetection.checkIfURLExists();
+            CheckForUpdates();
             mc.displayGuiScreen(null);
         }
     }
@@ -69,5 +69,7 @@ public class GuiMain extends GuiScreen
     }
 
     @Override
-    public boolean doesGuiPauseGame() { return false; }
+    public boolean doesGuiPauseGame() {
+        return false;
+    }
 }

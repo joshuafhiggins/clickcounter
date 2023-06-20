@@ -1,8 +1,6 @@
 package me.toast.clicks;
 
 import me.toast.clicks.guis.GuiMain;
-import me.toast.clicks.guis.GuiOverlay;
-import me.toast.clicks.utils.UpdateDetection;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -10,44 +8,43 @@ import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent;
 
-public class Listener
-{
-	private MainMod mod;
-	public Listener(MainMod mod) { this.mod = mod; }
-	
-	boolean isHeld = false;
-	private Minecraft mc = Minecraft.getMinecraft();
+import static me.toast.clicks.Utils.CheckForUpdates;
 
-	@SubscribeEvent
-	public void onJoin(FMLNetworkEvent.ClientConnectedToServerEvent	event)
-	{
-		UpdateDetection.checkIfURLExists();
-	}
+public class Listener {
+    private Minecraft mc = Minecraft.getMinecraft();
+    boolean isHeld = false;
 
-	@SubscribeEvent
-	public void MouseInputEvent(InputEvent e) {
-		if (mc.gameSettings.keyBindAttack.isKeyDown()) {
-			if (!isHeld) {
-				mod.getSettings().addClicks();
-				mod.getSettings().saveConfig();
-				isHeld = true;
-			}
-		} else {
-			if (isHeld) { isHeld = false; }
-		}
-	}
+    @SubscribeEvent
+    public void onJoin(FMLNetworkEvent.ClientConnectedToServerEvent event) {
+        CheckForUpdates();
+    }
 
-	@SubscribeEvent
-	public void onRenderTick(TickEvent.RenderTickEvent event) {
-		if (mod.openGui) {
-			Minecraft.getMinecraft().displayGuiScreen(new GuiMain(mod));
-			mod.openGui = false;
-		}
-	}
+    @SubscribeEvent
+    public void MouseInputEvent(InputEvent e) {
+        if (mc.gameSettings.keyBindAttack.isKeyDown()) {
+            if (!isHeld) {
+                Clicks.SETTINGS.addClicks();
+                isHeld = true;
+            }
+        } else {
+            if (isHeld) {
+                isHeld = false;
+            }
+        }
+    }
 
-	@SubscribeEvent
-	public void renderOverlay(RenderGameOverlayEvent.Post e) {
-		if(e.type != RenderGameOverlayEvent.ElementType.EXPERIENCE) return;
-		new GuiOverlay(Minecraft.getMinecraft(), mod);
-	}
+    @SubscribeEvent
+    public void onRenderTick(TickEvent.RenderTickEvent event) {
+        if (Clicks.GUI_OPEN) {
+            Minecraft.getMinecraft().displayGuiScreen(new GuiMain());
+            Clicks.GUI_OPEN = false;
+        }
+    }
+
+    @SubscribeEvent
+    public void renderOverlay(RenderGameOverlayEvent.Post e) {
+        if (e.type != RenderGameOverlayEvent.ElementType.EXPERIENCE)
+            return;
+        Utils.DrawLeftClicks(0.75F);
+    }
 }
