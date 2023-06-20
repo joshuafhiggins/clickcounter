@@ -1,11 +1,10 @@
-package me.toast.lcm.guis;
+package me.toast.clicks.guis;
 
-import me.toast.lcm.MainMod;
-import me.toast.lcm.utils.RainbowUtils;
+import me.toast.clicks.MainMod;
+import me.toast.clicks.utils.RainbowUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.ScaledResolution;
 
 import java.awt.*;
 

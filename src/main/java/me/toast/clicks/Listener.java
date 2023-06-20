@@ -1,8 +1,8 @@
-package me.toast.lcm;
+package me.toast.clicks;
 
-import me.toast.lcm.guis.GuiMain;
-import me.toast.lcm.guis.GuiOverlay;
-import me.toast.lcm.utils.UpdateDetection;
+import me.toast.clicks.guis.GuiMain;
+import me.toast.clicks.guis.GuiOverlay;
+import me.toast.clicks.utils.UpdateDetection;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;

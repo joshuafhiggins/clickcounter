@@ -1,4 +1,4 @@
-package me.toast.lcm;
+package me.toast.clicks;
 
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;

@@ -1,6 +1,6 @@
-package me.toast.lcm.guis;
+package me.toast.clicks.guis;
 
-import me.toast.lcm.MainMod;
+import me.toast.clicks.MainMod;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;

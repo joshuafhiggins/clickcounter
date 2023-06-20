@@ -1,4 +1,4 @@
-package me.toast.lcm;
+package me.toast.clicks;
 
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.fml.common.FMLCommonHandler;

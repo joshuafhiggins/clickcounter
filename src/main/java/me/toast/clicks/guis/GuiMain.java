@@ -1,10 +1,9 @@
-package me.toast.lcm.guis;
+package me.toast.clicks.guis;
 
-import me.toast.lcm.MainMod;
-import me.toast.lcm.utils.UpdateDetection;
+import me.toast.clicks.MainMod;
+import me.toast.clicks.utils.UpdateDetection;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 import java.io.IOException;
 

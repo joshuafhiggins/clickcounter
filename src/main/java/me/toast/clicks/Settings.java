@@ -1,4 +1,4 @@
-package me.toast.lcm;
+package me.toast.clicks;
 
 import java.io.File;
 

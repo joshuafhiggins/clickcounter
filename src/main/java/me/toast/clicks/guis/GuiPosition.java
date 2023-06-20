@@ -1,7 +1,7 @@
-package me.toast.lcm.guis;
+package me.toast.clicks.guis;
 
-import me.toast.lcm.MainMod;
-import me.toast.lcm.utils.RainbowUtils;
+import me.toast.clicks.MainMod;
+import me.toast.clicks.utils.RainbowUtils;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatStyle;

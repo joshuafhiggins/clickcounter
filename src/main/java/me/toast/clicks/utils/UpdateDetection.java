@@ -1,4 +1,4 @@
-package me.toast.lcm.utils;
+package me.toast.clicks.utils;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ChatComponentText;
