@@ -7,20 +7,26 @@ import net.minecraft.client.gui.GuiTextField;
 
 import java.io.IOException;
 
+import static me.toast.clicks.Utils.TextFieldIntersect;
+
 public class GuiPrefix extends GuiScreen {
     private GuiButton back;
-    private GuiTextField prefixText;
+    private GuiTextField leftPrefixText;
+    private GuiTextField rightPrefixText;
 
     @Override
     public void initGui() {
-        super.initGui();
+        leftPrefixText = new GuiTextField(0, fontRendererObj, width / 2 - 30, height / 2 - 45, 200, 25);
+        leftPrefixText.setText(Clicks.SETTINGS.getLeftPrefix());
 
-        prefixText = new GuiTextField(0, fontRendererObj, width / 2 - 30, height / 2 - 45, 200, 25);
-        prefixText.setText(Clicks.SETTINGS.getLeftPrefix());
+        rightPrefixText = new GuiTextField(1, fontRendererObj, width / 2 - 30, height / 2 - 45 - 50, 200, 25);
+        rightPrefixText.setText(Clicks.SETTINGS.getRightPrefix());
 
         back = new GuiButton(0, width / 2 - 100, 0, "Go back");
 
         buttonList.add(back);
+
+        super.initGui();
     }
 
     @Override
@@ -31,9 +37,11 @@ public class GuiPrefix extends GuiScreen {
 
         back.drawButton(mc, mouseX, mouseY);
 
-        prefixText.drawTextBox();
+        leftPrefixText.drawTextBox();
+        rightPrefixText.drawTextBox();
 
-        drawString(fontRendererObj, "Prefix: ", width / 2 - 75, height / 2 - 35, -1);
+        drawString(fontRendererObj, "Left clicks: ", width / 2 - 100, height / 2 - 35, -1);
+        drawString(fontRendererObj, "Right clicks: ", width / 2 - 100, height / 2 - 35 - 50, -1);
     }
 
     @Override
@@ -45,19 +53,20 @@ public class GuiPrefix extends GuiScreen {
 
     @Override
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
-        if (mouseButton == 0 && mouseX >= prefixText.xPosition && mouseX <= prefixText.xPosition + prefixText.width && mouseY >= prefixText.yPosition && mouseY <= prefixText.yPosition + prefixText.height) {
-            prefixText.setFocused(true);
-        } else {
-            prefixText.setFocused(false);
-        }
+        leftPrefixText.setFocused(TextFieldIntersect(leftPrefixText, mouseX, mouseY));
+        rightPrefixText.setFocused(TextFieldIntersect(rightPrefixText, mouseX, mouseY));
 
         super.mouseClicked(mouseX, mouseY, mouseButton);
     }
 
     @Override
     protected void keyTyped(char typedChar, int keyCode) throws IOException {
-        if (prefixText.isFocused()) {
-            prefixText.textboxKeyTyped(typedChar, keyCode);
+        if (leftPrefixText.isFocused()) {
+            leftPrefixText.textboxKeyTyped(typedChar, keyCode);
+        }
+
+        if (rightPrefixText.isFocused()) {
+            rightPrefixText.textboxKeyTyped(typedChar, keyCode);
         }
 
         super.keyTyped(typedChar, keyCode);
@@ -65,7 +74,8 @@ public class GuiPrefix extends GuiScreen {
 
     @Override
     public void onGuiClosed() {
-        Clicks.SETTINGS.setLeftPrefix(prefixText.getText());
+        Clicks.SETTINGS.setLeftPrefix(leftPrefixText.getText());
+        Clicks.SETTINGS.setRightPrefix(rightPrefixText.getText());
 
         super.onGuiClosed();
     }

@@ -12,7 +12,8 @@ import static me.toast.clicks.Utils.CheckForUpdates;
 
 public class Listener {
     private final Minecraft mc = Minecraft.getMinecraft();
-    boolean isHeld = false;
+    boolean leftIsHeld = false;
+    boolean rightIsHeld = false;
 
     @SubscribeEvent
     public void onJoin(FMLNetworkEvent.ClientConnectedToServerEvent event) {
@@ -22,13 +23,24 @@ public class Listener {
     @SubscribeEvent
     public void MouseInputEvent(InputEvent e) {
         if (mc.gameSettings.keyBindAttack.isKeyDown()) {
-            if (!isHeld) {
+            if (!leftIsHeld) {
                 Clicks.SETTINGS.incrementLeftClick();
-                isHeld = true;
+                leftIsHeld = true;
             }
         } else {
-            if (isHeld) {
-                isHeld = false;
+            if (leftIsHeld) {
+                leftIsHeld = false;
+            }
+        }
+
+        if (mc.gameSettings.keyBindUseItem.isKeyDown()) {
+            if (!rightIsHeld) {
+                Clicks.SETTINGS.incrementRightClick();
+                rightIsHeld = true;
+            }
+        } else {
+            if (rightIsHeld) {
+                rightIsHeld = false;
             }
         }
     }
@@ -45,6 +57,7 @@ public class Listener {
     public void renderOverlay(RenderGameOverlayEvent.Post e) {
         if (e.type != RenderGameOverlayEvent.ElementType.EXPERIENCE)
             return;
-        Utils.DrawLeftClicks(0.75F);
+
+        Utils.DrawClicks();
     }
 }

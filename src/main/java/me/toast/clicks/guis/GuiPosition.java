@@ -9,27 +9,38 @@ import net.minecraft.util.EnumChatFormatting;
 
 import java.io.IOException;
 
-import static me.toast.clicks.Utils.GetCustomColor;
-import static me.toast.clicks.Utils.RainbowEffect;
+import static me.toast.clicks.Utils.DrawText;
+import static me.toast.clicks.Utils.TextIntersect;
 
 public class GuiPosition extends GuiScreen {
-    private String string;
-    private int xPos;
-    private int yPos;
-    private int calculatedX;
-    private boolean isFocused;
+    private String leftText;
+    private String rightText;
+    private int leftXPos;
+    private int leftYPos;
+    private int rightXPos;
+    private int rightYPos;
+    private boolean leftIsFocused;
+    private boolean rightIsFocused;
     private GuiButton back;
 
     @Override
     public void initGui() {
-        super.initGui();
-        xPos = Clicks.SETTINGS.getLeftPos()[0];
-        yPos = Clicks.SETTINGS.getLeftPos()[1];
-        isFocused = false;
-        string = Clicks.SETTINGS.getLeftPrefix() + Clicks.SETTINGS.getLeftClicks();
-        calculatedX = string.length() * 10;
+        leftXPos = Clicks.SETTINGS.getLeftPos()[0];
+        leftYPos = Clicks.SETTINGS.getLeftPos()[1];
+
+        rightXPos = Clicks.SETTINGS.getRightPos()[0];
+        rightYPos = Clicks.SETTINGS.getRightPos()[1];
+
+        leftIsFocused = false;
+        rightIsFocused = false;
+
+        leftText = Clicks.SETTINGS.getLeftPrefix() + Clicks.SETTINGS.getLeftClicks();
+        rightText = Clicks.SETTINGS.getRightPrefix() + Clicks.SETTINGS.getRightClicks();
+
         back = new GuiButton(3, width / 2 - 100, 0, "Go back");
         buttonList.add(back);
+
+        super.initGui();
     }
 
     @Override
@@ -37,7 +48,15 @@ public class GuiPosition extends GuiScreen {
         drawDefaultBackground();
         super.drawScreen(mouseX, mouseY, partialTicks);
 
-        drawString(string, 0.75F);
+        DrawText(fontRendererObj, leftText, leftXPos, leftYPos,
+                Clicks.SETTINGS.getLeftColor(),
+                Clicks.SETTINGS.getLeftChroma(),
+                Clicks.SETTINGS.getLeftShadow());
+
+        DrawText(fontRendererObj, rightText, rightXPos, rightYPos,
+                Clicks.SETTINGS.getRightColor(),
+                Clicks.SETTINGS.getRightChroma(),
+                Clicks.SETTINGS.getRightShadow());
     }
 
     @Override
@@ -47,14 +66,23 @@ public class GuiPosition extends GuiScreen {
             return;
         }
 
-        if (!isFocused && mouseX >= xPos && mouseX <= xPos + calculatedX && mouseY >= yPos && mouseY <= yPos + 14) {
-            isFocused = true;
+        if (!leftIsFocused && TextIntersect(leftText, leftXPos, leftYPos, mouseX, mouseY)) {
+            leftIsFocused = true;
             mc.thePlayer.addChatMessage(new ChatComponentText("Text Selected!").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GOLD)));
         }
+        if (leftIsFocused) {
+            leftXPos = mouseX;
+            leftYPos = mouseY;
+        }
 
-        if (isFocused) {
-            xPos = mouseX;
-            yPos = mouseY;
+
+        if (!rightIsFocused && TextIntersect(rightText, rightXPos, rightYPos, mouseX, mouseY)) {
+            rightIsFocused = true;
+            mc.thePlayer.addChatMessage(new ChatComponentText("Text Selected!").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GOLD)));
+        }
+        if (rightIsFocused) {
+            rightXPos = mouseX;
+            rightYPos = mouseY;
         }
 
         super.mouseClickMove(mouseX, mouseY, mouseButton, timeSinceLastClick);
@@ -62,12 +90,20 @@ public class GuiPosition extends GuiScreen {
 
     @Override
     protected void mouseReleased(int mouseX, int mouseY, int state) {
-        if (isFocused) {
-            isFocused = false;
+        if (leftIsFocused) {
+            leftIsFocused = false;
             mc.thePlayer.addChatMessage(new ChatComponentText("Saved Location!").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.DARK_GREEN)));
             Clicks.SETTINGS.setLeftPos(mouseX, mouseY);
-            xPos = mouseX;
-            yPos = mouseY;
+            leftXPos = mouseX;
+            leftYPos = mouseY;
+        }
+
+        if (rightIsFocused) {
+            rightIsFocused = false;
+            mc.thePlayer.addChatMessage(new ChatComponentText("Saved Location!").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.DARK_GREEN)));
+            Clicks.SETTINGS.setRightPos(mouseX, mouseY);
+            rightXPos = mouseX;
+            rightYPos = mouseY;
         }
 
         super.mouseReleased(mouseX, mouseY, state);
@@ -89,12 +125,5 @@ public class GuiPosition extends GuiScreen {
     @Override
     public boolean doesGuiPauseGame() {
         return false;
-    }
-
-    private void drawString(String string, float brightness) {
-        for (int i = 0; i < string.length(); i++) {
-            if (Clicks.SETTINGS.getLeftChroma()) { mc.fontRendererObj.drawStringWithShadow(string, xPos, yPos, RainbowEffect(i * 3500000L, brightness, 250).getRGB()); }
-            else { mc.fontRendererObj.drawStringWithShadow(string, xPos, yPos, GetCustomColor().getRGB()); }
-        }
     }
 }

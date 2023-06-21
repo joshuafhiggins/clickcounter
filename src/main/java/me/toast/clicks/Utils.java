@@ -8,27 +8,50 @@ import java.awt.*;
 
 public class Utils {
 
-    public static void DrawLeftClicks(float brightness) {
-        String string = Clicks.SETTINGS.getLeftPrefix() + Clicks.SETTINGS.getLeftClicks();
+    public static void DrawClicks() {
         Minecraft mc = Minecraft.getMinecraft();
-        FontRenderer fr = mc.fontRendererObj;
+        if (mc.theWorld == null || mc.currentScreen != null)
+            return;
 
-        for (int i = 0; i < string.length(); i++) {
-            if (mc.theWorld != null && mc.currentScreen == null) {
-                if (Clicks.SETTINGS.getLeftChroma()) { fr.drawString(string, Clicks.SETTINGS.getLeftPos()[0], Clicks.SETTINGS.getLeftPos()[1], RainbowEffect(i * 3500000L, brightness, 250).getRGB(), Clicks.SETTINGS.getLeftShadow()); }
-                else { fr.drawString(string, Clicks.SETTINGS.getLeftPos()[0], Clicks.SETTINGS.getLeftPos()[1], GetCustomColor().getRGB(), Clicks.SETTINGS.getLeftShadow()); }
-            }
+        Settings cfg = Clicks.SETTINGS;
+        FontRenderer fr = mc.fontRendererObj;
+        String leftText = cfg.getLeftPrefix() + cfg.getLeftClicks();
+        String rightText = cfg.getRightPrefix() + cfg.getRightClicks();
+
+        if (cfg.getLeftEnabled()) {
+            DrawText(fr, leftText,
+                    cfg.getLeftPos()[0],
+                    cfg.getLeftPos()[1],
+                    cfg.getLeftColor(),
+                    cfg.getLeftChroma(),
+                    cfg.getLeftShadow());
+        }
+
+        if (cfg.getRightEnabled()) {
+            DrawText(fr, rightText,
+                    cfg.getRightPos()[0],
+                    cfg.getRightPos()[1],
+                    cfg.getRightColor(),
+                    cfg.getRightChroma(),
+                    cfg.getRightShadow());
         }
     }
+
+    public static void DrawText(FontRenderer fr, String text, int x, int y, int color, boolean chroma, boolean shadow) {
+        if (chroma) {
+            for (int i = 0; i < text.length(); i++) {
+                fr.drawString(text, x, y, RainbowEffect(i * 3500000L, 0.75F, 250).getRGB(), shadow);
+            }
+        } else {
+            fr.drawString(text, x, y, color, shadow);
+        }
+    }
+
     public static Color RainbowEffect(long offset, float brightness, int speed) {
         float hue = (float) (System.nanoTime() + (offset * speed)) / 1.0E10F % 1.0F;
         long color = Long.parseLong(Integer.toHexString(Color.HSBtoRGB(hue, brightness, 1F)), 16);
         Color c = new Color((int) color);
         return new Color(c.getRed()/255.0F, c.getGreen()/255.0F, c.getBlue()/255.0F, c.getAlpha()/255.0F);
-    }
-
-    public static Color GetCustomColor() {
-        return new Color(Clicks.SETTINGS.getLeftColor());
     }
 
     public static boolean TextFieldIntersect(GuiTextField field, int mouseX, int mouseY) {
@@ -37,6 +60,11 @@ public class Utils {
                 && mouseY >= field.yPosition
                 && mouseY <= field.yPosition + field.height;
     }
+
+    public static boolean TextIntersect(String text, int xPos, int yPos, int mouseX, int mouseY) {
+        return mouseX >= xPos && mouseX <= xPos + (text.length() * 10) && mouseY >= yPos && mouseY <= yPos + 14;
+    }
+
     public static void CheckForUpdates() {
         return; //TODO
     }
