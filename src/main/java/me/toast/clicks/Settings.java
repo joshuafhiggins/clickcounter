@@ -15,15 +15,15 @@ public class Settings {
     private String leftPrefix = "Left Clicks: ";
     private int leftColor = Color.WHITE.getRGB();
     private boolean leftChroma = false;
-    private boolean leftShadow = false;
+    private boolean leftShadow = true;
 
     private boolean rightEnabled = true;
     private int[] rightPos = { 0, 50 };
     private int rightClicks = 0;
-    private String rightPrefix = "right Clicks: ";
+    private String rightPrefix = "Right Clicks: ";
     private int rightColor = Color.WHITE.getRGB();
     private boolean rightChroma = false;
-    private boolean rightShadow = false;
+    private boolean rightShadow = true;
 
     public boolean getLeftEnabled() {
         return leftEnabled;
