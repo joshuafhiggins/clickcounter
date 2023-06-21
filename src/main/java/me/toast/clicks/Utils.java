@@ -91,6 +91,8 @@ public class Utils {
 
             if (!latestVersion.equals(Clicks.VERSION)) {
                 mc.thePlayer.addChatMessage(new ChatComponentText("§2There is an update available for Click Counter at: https://github.com/joshuafhiggins/clickcounter/"));
+            } else {
+                mc.thePlayer.addChatMessage(new ChatComponentText("§7There are no updates available."));
             }
 
             System.out.println(latestVersion);
