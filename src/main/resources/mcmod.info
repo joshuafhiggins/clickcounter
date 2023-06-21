@@ -3,7 +3,7 @@
   "modid": "clicks",
   "name": "Click Counter Mod",
   "description": "Counts how many times you left/right click.",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "mcversion": "1.8.9",
   "url": "https://joshuafhiggins.github.io/categories/clickcounter",
   "updateUrl": "",
