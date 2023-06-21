@@ -61,31 +61,35 @@ public class GuiPosition extends GuiScreen {
 
     @Override
     protected void mouseClickMove(int mouseX, int mouseY, int mouseButton, long timeSinceLastClick) {
-        if (mouseButton != 0) {
-            super.mouseClickMove(mouseX, mouseY, mouseButton, timeSinceLastClick);
-            return;
-        }
+        super.mouseClickMove(mouseX, mouseY, mouseButton, timeSinceLastClick);
 
-        if (!leftIsFocused && TextIntersect(leftText, leftXPos, leftYPos, mouseX, mouseY)) {
-            leftIsFocused = true;
-            mc.thePlayer.addChatMessage(new ChatComponentText("Text Selected!").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GOLD)));
-        }
+        if (mouseButton != 0)
+            return;
+
         if (leftIsFocused) {
             leftXPos = mouseX;
             leftYPos = mouseY;
+            return;
         }
 
-
-        if (!rightIsFocused && TextIntersect(rightText, rightXPos, rightYPos, mouseX, mouseY)) {
-            rightIsFocused = true;
-            mc.thePlayer.addChatMessage(new ChatComponentText("Text Selected!").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GOLD)));
-        }
         if (rightIsFocused) {
             rightXPos = mouseX;
             rightYPos = mouseY;
+            return;
         }
 
-        super.mouseClickMove(mouseX, mouseY, mouseButton, timeSinceLastClick);
+        if (TextIntersect(leftText, leftXPos, leftYPos, mouseX, mouseY)) {
+            leftIsFocused = true;
+            mc.thePlayer.addChatMessage(new ChatComponentText("Text Selected!").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GOLD)));
+            return;
+        }
+
+        if (TextIntersect(rightText, rightXPos, rightYPos, mouseX, mouseY)) {
+            rightIsFocused = true;
+            mc.thePlayer.addChatMessage(new ChatComponentText("Text Selected!").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GOLD)));
+            //return;
+        }
+
     }
 
     @Override

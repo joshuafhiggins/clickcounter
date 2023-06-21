@@ -17,7 +17,6 @@ import static me.toast.clicks.Utils.TextFieldIntersect;
 public class GuiColor extends GuiScreen {
     private GuiButton leftChroma;
     private GuiButton leftShadow;
-    private GuiButton leftTestNewColor;
     private GuiTextField leftRed;
     private GuiTextField leftGreen;
     private GuiTextField leftBlue;
@@ -25,7 +24,6 @@ public class GuiColor extends GuiScreen {
 
     private GuiButton rightChroma;
     private GuiButton rightShadow;
-    private GuiButton rightTestNewColor;
     private GuiTextField rightRed;
     private GuiTextField rightGreen;
     private GuiTextField rightBlue;
@@ -38,15 +36,11 @@ public class GuiColor extends GuiScreen {
     public void initGui() {
         leftChroma = new GuiButton(0, width / 2 - 110, height / 2 + 25, 100, 20, "Chroma? " + Clicks.SETTINGS.getLeftChroma());
         leftShadow = new GuiButton(1, width / 2 - 110, height / 2 + 50, 100, 20, "Shadow? " + Clicks.SETTINGS.getLeftShadow());
-        leftTestNewColor = new GuiButton(2, width / 2 - 110, height / 2 + 75, 100, 20, "Refresh Color");
-        buttonList.add(leftTestNewColor);
         buttonList.add(leftChroma);
         buttonList.add(leftShadow);
 
         rightChroma = new GuiButton(3, width / 2 + 30, height / 2 + 25, 100, 20, "Chroma? " + Clicks.SETTINGS.getRightChroma());
         rightShadow = new GuiButton(4, width / 2 + 30, height / 2 + 50, 100, 20, "Shadow? " + Clicks.SETTINGS.getRightShadow());
-        rightTestNewColor = new GuiButton(5, width / 2 + 30, height / 2 + 75, 100, 20, "Refresh Color");
-        buttonList.add(rightTestNewColor);
         buttonList.add(rightChroma);
         buttonList.add(rightShadow);
 
@@ -85,7 +79,7 @@ public class GuiColor extends GuiScreen {
         leftRed.drawTextBox();
         leftGreen.drawTextBox();
         leftBlue.drawTextBox();
-        DrawText(fontRendererObj, "Test Color", width / 2 - 55, height / 2 + 125, leftTestColor.getRGB(), Clicks.SETTINGS.getLeftChroma(), Clicks.SETTINGS.getLeftShadow());
+        DrawText(fontRendererObj, "Test Color", width / 2 - 55, height / 2 + 75, leftTestColor.getRGB(), Clicks.SETTINGS.getLeftChroma(), Clicks.SETTINGS.getLeftShadow());
         fontRendererObj.drawString("Red:", width / 2 - 13 - 70, (height / 2 - 62) - 50, -1);
         fontRendererObj.drawString("Green:", width / 2 - 25 - 70, (height / 2 - 27) - 50, -1);
         fontRendererObj.drawString("Blue:", width / 2 - 16 - 70, (height / 2 + 10) - 50, -1);
@@ -94,7 +88,7 @@ public class GuiColor extends GuiScreen {
         rightRed.drawTextBox();
         rightGreen.drawTextBox();
         rightBlue.drawTextBox();
-        DrawText(fontRendererObj, "Test Color", width / 2 + 45, height / 2 + 125, rightTestColor.getRGB(), Clicks.SETTINGS.getRightChroma(), Clicks.SETTINGS.getRightShadow());
+        DrawText(fontRendererObj, "Test Color", width / 2 + 45, height / 2 + 75, rightTestColor.getRGB(), Clicks.SETTINGS.getRightChroma(), Clicks.SETTINGS.getRightShadow());
         fontRendererObj.drawString("Red:", width / 2 - 13 + 35, (height / 2 - 62) - 50, -1);
         fontRendererObj.drawString("Green:", width / 2 - 25 + 35, (height / 2 - 27) - 50, -1);
         fontRendererObj.drawString("Blue:", width / 2 - 16 + 35, (height / 2 + 10) - 50, -1);
@@ -113,16 +107,6 @@ public class GuiColor extends GuiScreen {
             Clicks.SETTINGS.setLeftShadow();
             leftShadow.displayString = "Shadow? " + Clicks.SETTINGS.getLeftShadow();
         }
-        if (button == leftTestNewColor) {
-            try {
-                int redInt = Integer.parseInt(leftRed.getText());
-                int greenInt = Integer.parseInt(leftGreen.getText());
-                int blueInt = Integer.parseInt(leftBlue.getText());
-                leftTestColor = new Color(redInt, greenInt, blueInt);
-            } catch (NumberFormatException e) {
-                return;
-            }
-        }
 
         if (button == rightChroma) {
             Clicks.SETTINGS.setRightChroma();
@@ -131,16 +115,6 @@ public class GuiColor extends GuiScreen {
         if (button == rightShadow) {
             Clicks.SETTINGS.setRightShadow();
             rightShadow.displayString = "Shadow? " + Clicks.SETTINGS.getRightShadow();
-        }
-        if (button == rightTestNewColor) {
-            try {
-                int redInt = Integer.parseInt(rightRed.getText());
-                int greenInt = Integer.parseInt(rightGreen.getText());
-                int blueInt = Integer.parseInt(rightBlue.getText());
-                rightTestColor = new Color(redInt, greenInt, blueInt);
-            } catch (NumberFormatException e) {
-                return;
-            }
         }
 
         if (button == back)
@@ -183,6 +157,24 @@ public class GuiColor extends GuiScreen {
             rightGreen.textboxKeyTyped(typedChar, keyCode);
         if (rightBlue.isFocused())
             rightBlue.textboxKeyTyped(typedChar, keyCode);
+
+        try {
+            int redInt = Integer.parseInt(leftRed.getText());
+            int greenInt = Integer.parseInt(leftGreen.getText());
+            int blueInt = Integer.parseInt(leftBlue.getText());
+            leftTestColor = new Color(redInt, greenInt, blueInt);
+        } catch (NumberFormatException e) {
+            return;
+        }
+
+        try {
+            int redInt = Integer.parseInt(rightRed.getText());
+            int greenInt = Integer.parseInt(rightGreen.getText());
+            int blueInt = Integer.parseInt(rightBlue.getText());
+            rightTestColor = new Color(redInt, greenInt, blueInt);
+        } catch (NumberFormatException e) {
+            return;
+        }
 
         super.keyTyped(typedChar, keyCode);
     }

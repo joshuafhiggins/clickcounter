@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 public class Clicks {
     public static final String MOD_ID = "clicks";
     public static final String NAME = "Click Counter Mod";
-    public static final String VERSION = "v2.4.0";
+    public static final String VERSION = "v2.4.1";
     public static boolean GUI_OPEN = false;
     public static Settings SETTINGS = new Settings();
 
