@@ -6,9 +6,6 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.fml.common.network.FMLNetworkEvent;
-
-import static me.toast.clicks.Utils.CheckForUpdates;
 
 public class Listener {
     private final Minecraft mc = Minecraft.getMinecraft();
@@ -16,12 +13,7 @@ public class Listener {
     boolean rightIsHeld = false;
 
     @SubscribeEvent
-    public void onJoin(FMLNetworkEvent.ClientConnectedToServerEvent event) {
-        CheckForUpdates();
-    }
-
-    @SubscribeEvent
-    public void MouseInputEvent(InputEvent e) {
+    public void MouseInputEvent(InputEvent.MouseInputEvent e) {
         if (mc.gameSettings.keyBindAttack.isKeyDown()) {
             if (!leftIsHeld) {
                 Clicks.SETTINGS.incrementLeftClick();
