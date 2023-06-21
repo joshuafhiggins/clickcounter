@@ -9,21 +9,15 @@ import net.minecraftforge.common.config.Configuration;
 public class Settings {
     private final File saveFile = new File(Minecraft.getMinecraft().mcDataDir, "config/Clicks.cfg");
 
-    private boolean leftEnabled = true;
-    private int[] leftPos = { 0, 0 };
-    private int leftClicks = 0;
-    private String leftPrefix = "Left Clicks: ";
-    private int leftColor = Color.WHITE.getRGB();
-    private boolean leftChroma = false;
-    private boolean leftShadow = true;
+    private int[] leftPos;
+    private int leftClicks, leftColor;
+    private String leftPrefix;
+    private boolean leftChroma, leftShadow, leftEnabled;
 
-    private boolean rightEnabled = true;
-    private int[] rightPos = { 0, 50 };
-    private int rightClicks = 0;
-    private String rightPrefix = "Right Clicks: ";
-    private int rightColor = Color.WHITE.getRGB();
-    private boolean rightChroma = false;
-    private boolean rightShadow = true;
+    private int[] rightPos;
+    private int rightClicks, rightColor;
+    private String rightPrefix;
+    private boolean rightChroma, rightShadow, rightEnabled;
 
     public boolean getLeftEnabled() {
         return leftEnabled;
